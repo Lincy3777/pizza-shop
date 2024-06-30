@@ -7,6 +7,8 @@ const expressLayout = require('express-ejs-layouts');
 const PORT = process.env.PORT || 3300;
 // it will check the environment variable first if it doesnt find port var. then it will run on 3000
 
+//Assets
+app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.render('home');
 });//request on /                                                                                                                            
