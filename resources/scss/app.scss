@@ -1,4 +1,6 @@
 @import './variables';
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
 
 body{
     font-family: 'Lato', sans-serif;
@@ -35,6 +37,9 @@ section.hero{
         border-color:$pure ;
         color:$pure;
     }
+    &:focus{
+        outline: none;
+    }
 }
 
 .btn-primary{
@@ -52,12 +57,15 @@ section.cart{
 }
 section.login{
     background: $secondary;
-    min-height: calc(100vh - 100px);//412
+    min-height: calc(100vh - 412px);//412
     a{
         color:$primary;
         &:hover{
             color: $primary-hover;
         }
     }
-
+}
+.noty_theme__mint {
+    border-radius: 50px !important;
+    padding-left: 8px !important;
 }
