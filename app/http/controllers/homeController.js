@@ -8,7 +8,7 @@ function homeController(){
             //     return res.render('home',{pizzas: pizzas})
             // })
             const pizzas = await Menu.find()
-            console.log(pizzas)
+            // console.log(pizzas)
             res.render('home',{pizzas: pizzas})//This function has to be async else it throws warnings
         }
     } 

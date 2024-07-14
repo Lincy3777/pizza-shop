@@ -27,8 +27,8 @@
             <% if(user) { %>
             <div>
                 <form action="/order" method="POST" class="mt-12">
-                    <input name="phoneNo" class="broder border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Phone number">
-                    <input name="address" class="broder border-gray-400 p-2 w-1/2" type="text" placeholder="Address">  
+                    <input type="text" name="phone" id="phone" class="broder border-gray-400 p-2 w-1/2 mb-4" placeholder="Phone number">
+                    <input type="text" name="address" id="address" class="broder border-gray-400 p-2 w-1/2" placeholder="Address">  
                     <div>
                         <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" type="submit">Order Now</button>
                     </div>

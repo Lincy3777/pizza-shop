@@ -6,13 +6,18 @@ const path = require('path');
 const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
-const flash = require('express-flash');
+
 const mongoose = require('mongoose');
-const PORT = process.env.PORT || 3300;
-// it will check the environment variable first; if it doesn't find PORT, then it will run on 3300
+
 const MongoDbStore = require('connect-mongo');
 
+
+const flash = require('express-flash');
+
 const passport = require('passport');
+
+const PORT = process.env.PORT || 3300;
+// it will check the environment variable first; if it doesn't find PORT, then it will run on 3300
 
 // Database connection
 const url = 'mongodb://localhost/pizza';
@@ -69,6 +74,9 @@ app.use((req, res ,next) => {// to make session and user available in frontend
     res.locals.user = req.user;
     next();//to continue process , else it will hang
 })
+
+//middleware
+app.use(express.urlencoded({ extended: true }));
 
 require('./routes/web')(app); // app is passed here, thus received in web.js function
 
