@@ -11,10 +11,11 @@ const mongoose = require('mongoose');
 
 const MongoDbStore = require('connect-mongo');
 
-
 const flash = require('express-flash');
 
 const passport = require('passport');
+
+const Emitter = require('events');
 
 const PORT = process.env.PORT || 3300;
 // it will check the environment variable first; if it doesn't find PORT, then it will run on 3300
@@ -35,6 +36,10 @@ let mongoStore = MongoDbStore.create({
     mongoUrl: url, // Changed from 'connection' to 'url'
     collectionName: 'sessions' // Corrected the option name to 'collectionName'
 });
+
+//event emitter
+const eventEmitter = new Emitter();
+app.set('eventEmitter',eventEmitter);//binding of eventEmitter with app
 
 // Session config
 app.use(session({
@@ -80,6 +85,24 @@ app.use(express.urlencoded({ extended: true }));
 
 require('./routes/web')(app); // app is passed here, thus received in web.js function
 
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+const server = app.listen(PORT, () => {
+            console.log(`Listening on port ${PORT}`);
+        });
+
+//socket
+const io = require('socket.io')(server);
+io.on('connection',(socket) => {//every order will have a doff. provate room to listen and update status accordingly
+    //join
+    socket.on('join',async (orderId) => {
+        socket.join(orderId)
+    });
 });
+
+eventEmitter.on('orderUpdated',(data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated',data);
+});
+
+eventEmitter.on('orderPlaced',(data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
+});
+

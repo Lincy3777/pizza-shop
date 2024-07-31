@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import Noty from 'noty'
 
-function initAdmin(){
+function initAdmin(socket){
     const orderTableBody  = document.querySelector('#orderTableBody')
     let orders = []
     let markup
@@ -82,7 +82,8 @@ function initAdmin(){
         }).join('')
     }
     // Socket
-    socket.on('orderPlaced', (order) => {
+   
+    socket.on('orderPlaced', async (order) => {
         new Noty({
             type: 'success',
             timeout: 1000,
