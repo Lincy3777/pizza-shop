@@ -2,6 +2,7 @@ import axios from 'axios';
 import Noty from 'noty'; 
 import { initAdmin } from './admin';
 import moment from 'moment';
+import { initStripe } from './stripe' ;
 
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cartCounter');
@@ -12,14 +13,14 @@ function updateCart(pizza){
         cartCounter.innerText = res.data.totalQty;
         new Noty({
             type:'success',
-            timeout: 1000,
+            timeout: 500,
             text: 'Item added to cart',
             progressBar : false,
           }).show() ;
         }).catch(err => {
         new Noty({
             type:'error',
-            timeout:1000,
+            timeout:700,
             text: 'something went wrong',
             progressBar : false,
           }).show();  
@@ -72,6 +73,9 @@ function updateStatus(order){
     })
 
 }
+updateStatus(order);
+
+initStripe();
 
 //socket
 let socket = io();
@@ -82,6 +86,7 @@ if(order){
 }
 let adminAreaPath = window.location.pathname;
 if(adminAreaPath.includes('admin')){
+    initAdmin(socket);  
     socket.emit('join', 'adminRoom');
 }
 
@@ -98,9 +103,4 @@ socket.on('orderUpdated',(data) => {
         text: 'Order Updated',
         progressBar : false,
       }).show() ;
-})
-
-
-updateStatus(order);
-
-initAdmin(socket);  
+});

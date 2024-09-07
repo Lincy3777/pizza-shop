@@ -57,7 +57,7 @@ section.cart{
 }
 section.login{
     background: $secondary;
-    min-height: calc(100vh - 412px);//412
+    min-height: calc(100vh - 412px);
     a{
         color:$primary;
         &:hover{
@@ -75,7 +75,10 @@ a.link{
 
 section.status{
     background: $secondary;
-    min-height:calc(100vh - 312px);
+    min-height:calc(115vh - 312px);
+}
+section.orders{
+    min-height: calc(100vh - 370px);
 }
 .status-box{
     padding: 60px 0 0;
@@ -171,3 +174,105 @@ section.status{
     font-size:14px;
     margin-top: 8px;
 }
+
+@media(max-width:1060px){
+    .container{
+        max-width:90%;
+    }
+    table{
+        display:block;
+        overflow-x:auto;
+        white-space: nowrap;
+    }
+}
+@media(max-width:768px){
+    .status-box ul li span:before{
+        font-size: 34px;
+    }
+}
+.StripeElement {
+    box-sizing: border-box;
+    width: 50%;
+    margin-left: auto;
+    height: 40px;
+    padding: 10px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+  footer{
+    background-color: #111;
+  }
+  .footerContainer{
+      width: 100%;
+      padding: 70px 30px 20px ;
+  }
+  .socialIcons{
+    display: flex;
+     justify-content: center;
+  }
+.socialIcons a{
+  text-decoration: none;
+  padding:  10px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 50%;
+}
+.socialIcons a i{
+  font-size: 2em;
+  color: black;
+  opacity: 0,9;
+}
+/* Hover affect on social media icon */
+.socialIcons a:hover{
+  background-color: #111;
+  transition: 0.5s;
+}
+.socialIcons a:hover i{
+  color: white;
+  transition: 0.5s;
+}
+.footerNav{
+  margin: 30px 0;
+}
+.footerNav ul{
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+.footerNav ul li a{
+  color:white;
+  margin: 15px;
+  text-decoration: none;
+  font-size: 1.3em;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+  .footerNav ul li a:hover{
+      opacity: 1;
+  }
+  .footerBottom{
+      background-color: #000;
+      padding: 15px;
+      text-align: center;
+  }
+  .footerBottom p{
+      color: white;
+  }

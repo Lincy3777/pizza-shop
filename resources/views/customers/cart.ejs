@@ -1,7 +1,7 @@
 <section class="cart py-16">
-    <% if(session.cart) { %>
-    <div class="order container mx-auto w-1/2">
-        <div class="flex items-center broder-b border-gray-300 pb-5 ">
+    <% if(session.cart && session.cart.totalQty > 0) { %>
+    <div class="order container mx-auto xl:w-1/2">
+        <div class="flex items-center border-b border-gray-300 pb-5">
             <img src="/img/cart-black.png" alt="cart">
             <h1 class="font-bold ml-4 text-2xl">Order Summary</h1>
         </div>
@@ -13,8 +13,13 @@
                     <h1><%= pizza.item.name %></h1>
                     <span><%= pizza.item.size %></span>
                 </div>
-                <span class="flex-1"><%= pizza.qty %> Pcs</span>
-                <span class="font-bold text-lg">₹ <%= pizza.item.price * pizza.qty %></span>
+                <div class="flex items-center">
+                    <button class="qty-btn decrement px-3 py-1 bg-gray-200 rounded" data-id="<%= pizza.item._id %>">-</button>
+                    <span class="mx-4"><%= pizza.qty %> Pcs</span>
+                    <button class="qty-btn increment px-3 py-1 bg-gray-200 rounded" data-id="<%= pizza.item._id %>">+</button>
+                </div>
+                <span class="font-bold text-lg ml-4">₹ <%= pizza.item.price * pizza.qty %></span>
+                <i class="fa-solid fa-trash remove-icon ml-5 text-gray-500 cursor-pointer" data-id="<%= pizza.item._id %>"></i>                
             </div>
             <% } %>
         </div>
@@ -26,10 +31,20 @@
             </div>
             <% if(user) { %>
             <div>
-                <form action="/order" method="POST" class="mt-12">
-                    <input type="text" name="phone" id="phone" class="broder border-gray-400 p-2 w-1/2 mb-4" placeholder="Phone number">
-                    <input type="text" name="address" id="address" class="broder border-gray-400 p-2 w-1/2" placeholder="Address">  
-                    <div>
+                <form action="/order" method="POST" class="mt-12" id="payment-form">
+                    <div class="relative w-1/2 ml-auto mb-4">
+                        <select id="paymentType" name="paymentType" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                          <option value="cod">Cash on delivery</option>
+                          <option value="card">Pay with card</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                      </div>
+                    <input type="text" name="phone" id="phone" class="border border-gray-400 p-2 w-1/2 mb-4" placeholder="Phone number">
+                    <input type="text" name="address" id="address" class="border border-gray-400 p-2 w-1/2" placeholder="Address">  
+                    <div class="mt-4">
+                        <div id="card-element"></div>
                         <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" type="submit">Order Now</button>
                     </div>
                 </form>
@@ -40,15 +55,57 @@
         </div>
     </div>
     <% } else { %>
-    <div class="empty-cart py-16">
-        <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold mb-2">Cart Empty 😔</h1>
-            <p class="text-gray-500 text-lg mb-12">You probably haven't ordered yet.<br>
-                To order, go to the main page.
-            </p>
-            <img class="w-2/5 mx-auto" src="/img/empty-cart.png" alt="empty-cart">
-            <a href="/" class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Go back</a>
+        <div class="empty-cart py-16">
+            <div class="container mx-auto text-center">
+                <h1 class="text-3xl font-bold mb-2">Cart Empty 😔</h1>
+                <p class="text-gray-500 text-lg mb-12">You probably haven't ordered yet.<br>
+                    To order, go to the main page.
+                </p>
+                <img class="w-2/5 mx-auto" src="/img/empty-cart.png" alt="empty-cart">
+                <a href="/" class="inline-block px-6 py-2 rounded-full btn-primary text-white font-bold mt-12">Go back</a>
+            </div>
         </div>
-    </div>
     <% } %>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const incrementButtons = document.querySelectorAll('.increment');
+        const decrementButtons = document.querySelectorAll('.decrement');
+        const removeIcons = document.querySelectorAll('.remove-icon');
+
+        incrementButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                updateCart(this.dataset.id, 'increment');
+            });
+        });
+
+        decrementButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                updateCart(this.dataset.id, 'decrement');
+            });
+        });
+
+        removeIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            updateCart(this.dataset.id, 'remove');
+        });
+    });
+
+        function updateCart(_id, action) {
+            fetch('/update-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ _id: _id, action: action })  // Correctly using _id and action
+            })
+            .then(response => response.json())
+            .then(data => {
+                location.reload(); // Reload page to reflect changes
+            })
+            .catch(error => console.error('Error updating cart:', error));
+        }
+    });
+</script>
+

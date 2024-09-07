@@ -1,34 +1,58 @@
-
 <section class="hero py-16">
     <div class="container mx-auto flex items-center justify-between">
         <div class="w-1/2">
             <h6 class="text-lg"><em>Are you hungry</em></h6>
-            <H1 class="text-6xl font-bold">Don't wait</H1>
-            <button class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary">Order Now</button>
+            <H1 class="text-3xl md:text-6xl font-bold">Don't wait</H1>
+            <a href="/cart" class="inline-block">
+                <button class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary">Order Now</button>
+            </a>
         </div>
         <div class="w-1/2">
-            <img src="/img/hero-pizza.png" alt="pizza">
+            <img src="/img/pizza.png" alt="pizza">
         </div>
     </div>
 </section>
+
 <section class="menu container mx-auto py-8">
-    <h1 class="text-xl  font-bold mb-8 ">All Pizzas Available</h1>
-    <div class="my-grid grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-3 p-4">
-        <% pizzas.forEach(function(pizza){ %>
-            <div class="w-64 bg-white shadow-md rounded-lg p-4">
-                <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="pizza">
+    <h1 id="all-pizzas-title" class="text-xl font-bold mb-8">All Pizzas Available</h1>
+
+    <div class="mb-4 flex space-x-4">
+        <button id="veg-btn" class="px-6 py-2 rounded-full text-white font-bold btn-primary">Veg</button>
+        <button id="non-veg-btn" class="px-6 py-2 rounded-full text-white font-bold btn-primary">Non-Veg</button>
+        <button id="all-btn" class="px-6 py-2 rounded-full text-white font-bold btn-primary">All</button>
+    </div>
+
+    <div id="pizzas-container" class="my-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4">
+        <% pizzas.forEach(pizza => { %>
+            <div class="pizza-item w-full md:w-64 bg-white shadow-md rounded-lg p-4" data-type="<%= pizza.type %>">
+                <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="<%= pizza.name %>">
                 <div class="text-center">
                     <h2 class="mb-4 text-lg"><%= pizza.name %></h2>
                     <span class="size py-1 px-4 bg-gray-200 rounded-full uppercase text-xs"><%= pizza.size %></span>
-                    <div class="items-center justify-around mt-6 flex">
+                    <div class="items-center justify-center mt-6 flex gap-4">
                         <span class="font-bold text-lg">₹<%= pizza.price %></span>
-                        <button data-pizza="<%= JSON.stringify(pizza) %>" class="add-to-cart py-1 px-6 text-white rounded-full flex items-center font-bold">
-                            <span>+</span>
-                            <span class="ml-4">Add</span>
-                        </button>
+                        
+                        <% if (user && user.role === 'admin'){ %>
+                            <button onclick="window.location.href='/admin/menu/edit/<%= pizza._id %>'" class="add-to-cart py-1 px-4 text-white rounded-full flex items-center font-bold">
+                                Edit
+                            </button>
+                            <button data-pizza="<%= JSON.stringify(pizza) %>" class="add-to-cart py-1 px-4 text-white rounded-full flex items-center font-bold">
+                                <span>+</span>
+                                <span class="ml-4">Add</span>
+                            </button>
+                        <% } else { %>
+                            <button data-pizza="<%= JSON.stringify(pizza) %>" class="add-to-cart py-1 px-6 text-white rounded-full flex items-center font-bold">
+                                <span>+</span>
+                                <span class="ml-4">Add</span>
+                            </button>
+                        <% } %>
                     </div>
                 </div>
             </div>
-        <% }) %>
+        <% }); %>
+        
+        
     </div>
 </section>
+<script src="resources/js/filter.js"></script>
+

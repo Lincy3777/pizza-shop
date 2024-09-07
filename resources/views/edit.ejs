@@ -1,0 +1,29 @@
+
+<section class="login ">
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+
+    <h1 class="text-2xl font-bold mb-6">Edit Pizza</h1>
+    <form action="/admin/menu/update/<%= pizza._id %>" method="POST" class="space-y-4">
+        <div class="flex flex-col">
+            <label for="name" class="font-medium text-gray-700">Pizza Name:</label>
+            <input type="text" id="name" name="name" value="<%= pizza.name %>" required class="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="flex flex-col">
+            <label for="price" class="font-medium text-gray-700">Price:</label>
+            <input type="text" id="price" name="price" value="<%= pizza.price %>" required class="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="flex flex-col">
+            <label for="size" class="font-medium text-gray-700">Size:</label>
+            <input type="text" id="size" name="size" value="<%= pizza.size %>" required class="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="flex flex-col">
+            <label for="type" class="font-medium text-gray-700">Type (Veg/Non-Veg):</label>
+            <input type="text" id="type" name="type" value="<%= pizza.type %>" required class="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <button type="submit" class="w-full bg-red-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2">Update</button>
+    </form>
+    <a href="/" class="block text-center mt-4 hover:underline">Back to Menu</a>
+        </div>
+    </div>
+</section>

@@ -7,6 +7,8 @@ const menuSchema = new Schema({//no raw data only paths
     image: {type: String, required: true },
     price: {type: Number, required: true },
     size: {type: String, required: true },
+    ///////////////////////////////
+    type: {type: String, required: true},
 })//blueprint
 
 module.exports = mongoose.model('Menu',menuSchema)//name of table, the schema

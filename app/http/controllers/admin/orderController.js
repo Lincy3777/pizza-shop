@@ -6,8 +6,9 @@ function orderController() {
         index(req, res) {
             Order.find({ status: { $ne: 'completed' } })
                 .sort({ 'createdAt': -1 })
-                .populate('customerId', '-password') // Populate customerId with user information
+                .populate('customerId', '-password') // Populate customerId with user information and eliminated password field
                 .then(orders => {
+                console.log('Orders:', orders);
                     if (req.xhr) {
                         return res.json(orders);
                     } else {
@@ -18,6 +19,8 @@ function orderController() {
                     console.error('Error fetching orders:', err);
                     return res.status(500).json({ error: 'Internal Server Error' });
                 });
+            
+
         }
     };
 }

@@ -6,7 +6,8 @@
     "name": "Margherita",
     "image": "pizza.png",
     "price": "250",
-    "size": "small"
+    "size": "small",
+    "type":"veg"
   },{
     "_id": {
       "$oid": "5eee6671a27a66807cf2bea3"
@@ -14,7 +15,8 @@
     "name": "Marinara",
     "image": "pizza.png",
     "price": "300",
-    "size": "medium"
+    "size": "medium",
+    "type":"veg"
   },{
     "_id": {
       "$oid": "5eee6692a27a66807cf2bea4"
@@ -22,7 +24,8 @@
     "name": "Carbonara",
     "image": "pizza.png",
     "price": "200",
-    "size": "small"
+    "size": "small",
+    "type":"veg"
   },{
     "_id": {
       "$oid": "5eee66a5a27a66807cf2bea5"
@@ -30,7 +33,8 @@
     "name": "Americana",
     "image": "pizza.png",
     "price": "500",
-    "size": "large"
+    "size": "large",
+    "type":"non-veg"
   },{
     "_id": {
       "$oid": "5eee66c4a27a66807cf2bea6"
@@ -38,7 +42,8 @@
     "name": "Chicken Mushroom",
     "image": "pizza.png",
     "price": "350",
-    "size": "medium"
+    "size": "medium",
+    "type":"non-veg"
   },{
     "_id": {
       "$oid": "5eee66cfa27a66807cf2bea7"
@@ -46,7 +51,8 @@
     "name": "Paneer pizza",
     "image": "pizza.png",
     "price": "200",
-    "size": "small"
+    "size": "small",
+    "type":"veg"
   },{
     "_id": {
       "$oid": "5eee66eea27a66807cf2bea8"
@@ -54,7 +60,8 @@
     "name": "Vegies pizza",
     "image": "pizza.png",
     "price": "600",
-    "size": "large"
+    "size": "large",
+    "type":"veg"
   },{
     "_id": {
       "$oid": "5eee6717a27a66807cf2bea9"
@@ -62,6 +69,26 @@
     "name": "Pepperoni",
     "image": "pizza.png",
     "price": "500",
-    "size": "medium"
-  }]
+    "size": "medium",
+    "type":"non-veg"
+  },{
+    "_id": {
+      "$oid": "66c5d6cac70e09d2d09e9780"
+    },
+    "name": "Chicken Mushroom",
+    "image": "pizza.png",
+    "price": "350",
+    "size": "medium",
+    "type":"non-veg"
+  },{
+    "_id": {
+      "$oid": "66c5d6ffc70e09d2d09e9781"
+    },
+    "name": "Americana",
+    "image": "pizza.png",
+    "price": "350",
+    "size": "small",
+    "type":"non-veg"
+  }
+]
   
