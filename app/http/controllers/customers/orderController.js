@@ -12,6 +12,11 @@ function orderController() {
                 return res.status(422).json({ message: 'All fields are mandatory' });
             }
 
+            // Check if cart exists and has items
+            if (!req.session.cart || !req.session.cart.items) {
+                return res.status(400).json({ message: 'Your cart is empty' });
+            }
+
             const order = new Order({
                 customerId: req.user._id,
                 items: req.session.cart.items,
@@ -27,12 +32,13 @@ function orderController() {
                 if (paymentType === 'card') {
                     try {
                         await stripe.charges.create({
-                            amount: req.session.cart.totalPrice * 100,
+                            amount: req.session.cart.totalPrice * 100, // Assuming totalPrice is stored in session
                             source: stripeToken,
                             currency: 'inr',
                             description: `Pizza order: ${placedOrder._id}`,
                         });
-                        placedOrder.paymentType = paymentType
+
+                        placedOrder.paymentType = paymentType;
                         placedOrder.paymentStatus = true;
                         await placedOrder.save();
 
@@ -44,7 +50,6 @@ function orderController() {
                         delete req.session.cart;
                         return res.json({ message: 'Payment successful, Order placed successfully' });
                     } catch (err) {
-                        // Handle payment failure
                         console.error('Payment error:', err);
                         delete req.session.cart;
                         return res.json({
@@ -92,5 +97,5 @@ function orderController() {
         },
     };
 }
-module.exports = orderController;
 
+module.exports = orderController;
