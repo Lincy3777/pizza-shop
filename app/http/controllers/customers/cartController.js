@@ -31,8 +31,8 @@ function cartController() {
                     cart.items[_id].qty += 1;
                     cart.totalQty += 1;
                     cart.totalPrice += price;
-                    cart.items[_id].qty -= 1;
                 } else if (action === 'decrement' && cart.items[_id]) {
+                    cart.items[_id].qty -= 1;
                     cart.totalQty -= 1;
                     cart.totalPrice -= price;
 

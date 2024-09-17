@@ -44,7 +44,6 @@ function initRoutes(app){
     app.get('/admin/orders', admin , AdminOrderController().index)
     app.post('/admin/order/status', admin , statusController().update)
     
-    /////////////////////////////////
 // Route to render the edit page
 app.get('/admin/menu/edit/:id', async (req, res) => {
     const { id } = req.params; // Get the pizza ID from the URL
