@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Store</title>
+    <title>Pepperoni Express</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
     <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
     <link rel="stylesheet" href="/css/app.css">    
@@ -15,14 +15,14 @@
 </head>
 <body>
      <nav class="container mx-auto flex items-center justify-between py-4">
-        <div>
-            <a href="/"><img src="/img/logo.png" alt="logo"></a>
+        <div  >
+            <a href="/"><img src="/img/myLogo.png" alt="logo"></a>
         </div>
         <div>
             <ul class="flex items-center">
-                <li class="ml-6"><a href="/">Menu</a></li>                
+                <li class="ml-6 text-lg"><a href="/">Menu</a></li>                
                 <% if(user) { %>
-                    <li class="ml-6">
+                    <li class="ml-6 text-lg">
                         <% if(user.role === 'admin') { %>
                             <a href="/admin/orders">Orders</a>
                         <% } else { %>
@@ -30,14 +30,14 @@
                         <% } %>
                     </li>
                     
-                    <li class="ml-6">
+                    <li class="ml-6 text-lg">
                         <form id="logout" action="/logout" method="POST">
                             <a onclick="document.getElementById('logout').submit()" href="#">Logout</a>
                         </form>
                     </li>
                 <% } else { %>
-                    <li class="ml-6"><a href="/register">Register</a></li>
-                    <li class="ml-6"><a href="/login">Login</a></li>
+                    <li class="ml-6 text-lg"><a href="/register">Register</a></li>
+                    <li class="ml-6 text-lg"><a href="/login">Login</a></li>
                 <% } %>
     
                 <!-- Cart element -->
@@ -50,12 +50,12 @@
     
                 <!-- User profile display -->
                 <% if(user) { %>
-                    <li class="ml-6 flex flex-col items-center">
+                    <li class="ml-6 flex flex-col items-center ">
                         <i class="fas fa-user-circle text-sm mb-1" style="color: #973131;"></i> 
                         <% if(user.role === 'admin') { %>
-                            <span class="font-bold text-xs">Admin</span>
+                            <span class="font-bold text-sm">Admin</span>
                         <% } else { %>
-                            <span class="font-bold text-xs"><%= user.name %></span>
+                            <span class="font-bold text-sm"><%= user.name %></span>
                         <% } %>
                     </li>
                 <% } %>
@@ -66,35 +66,46 @@
     
     
     <%- body %>
-    <footer>
-        <div class="footerContainer mt-4">
-            <div class="socialIcons">
-                <a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                    <i class="fa-brands fa-linkedin" title="Navigates to linkedin page"></i></a>
-                <a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                    <i class="fa-brands fa-instagram" title="Navigates to linkedin page"></i></a>
-                <a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                    <i class="fa-brands fa-twitter" title="Navigates to linkedin page"></i></a>
-                <a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                    <i class="fa-brands fa-facebook" title="Navigates to linkedin page"></i></a>
-                <a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                    <i class="fa-brands fa-youtube" title="Navigates to linkedin page"></i></a>
+        <footer class="bg-black text-white py-4">
+        <div class="footerContainer container mx-auto px-4 md:px-8">
+            <!-- Social Icons -->
+            <div class="socialIcons flex justify-center mb-4">
+                <a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="mx-2">
+                    <i class="fa-brands fa-linkedin text-xl" title="LinkedIn"></i>
+                </a>
+                <a href="https://www.instagram.com/" class="mx-2">
+                    <i class="fa-brands fa-instagram text-xl" title="Instagram"></i>
+                </a>
+                <a href="https://twitter.com/" class="mx-2">
+                    <i class="fa-brands fa-twitter text-xl" title="Twitter"></i>
+                </a>
+                <a href="https://www.facebook.com/" class="mx-2">
+                    <i class="fa-brands fa-facebook text-xl" title="Facebook"></i>
+                </a>
+                <a href="https://www.youtube.com/" class="mx-2">
+                    <i class="fa-brands fa-youtube text-xl" title="YouTube"></i>
+                </a>
             </div>
-            <div class="footerNav">
-                <ul><li><a href="#" title="On the same page">Home</a></li>
-                    <li><a href="https://www.bbc.com/" title="Navigates to bbc.com">News</a></li>
-                    <li><a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="Navigates to linkedin page">
-                        About</a></li>
-                    <li><a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="Navigates to linkedin page">Contact Us</a></li>
-                    <li><a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="Navigates to linkedin page">
-                        our Team</a></li>
+    
+            <!-- Footer Navigation -->
+            <div class="footerNav mb-4">
+                <ul class="flex flex-wrap justify-center space-x-4">
+                    <li><a href="#" class="hover:underline" title="On the same page">Home</a></li>
+                    <li><a href="https://www.bbc.com/" class="hover:underline" title="BBC News">News</a></li>
+                    <li><a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="hover:underline" title="About">About</a></li>
+                    <li><a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="hover:underline" title="Contact Us">Contact Us</a></li>
+                    <li><a href="https://www.linkedin.com/in/lincy-thomas-518660252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="hover:underline" title="Our Team">Our Team</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footerBottom">
-            <p>Copyright &nbsp;<i class="fa-regular fa-copyright"></i>&nbsp; 2024; Designed by Lincy</p>
+    
+        <!-- Footer Bottom -->
+        <div class="footerBottom bg-black text-center py-2">
+            <p class="text-sm">Copyright &nbsp;<i class="fa-regular fa-copyright"></i>&nbsp; 2024; Designed by Lincy</p>
         </div>
     </footer>
+    
+    
     <script src="/socket.io/socket.io.js"></script>
 
     <script src="/js/app.js"></script>

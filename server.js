@@ -21,14 +21,24 @@ const PORT = process.env.PORT || 3300;
 
 // Database connection
 // const url = 'mongodb://localhost/pizza';
-mongoose.connect(process.env.MONGO_CONNECTION_URL)
-.then(() => { // Similar to an event listener
-    console.log('Database connected..');
-})
-.catch(err => {
-    console.log('Connection failed..', err);
-});
-
+// mongoose.connect(process.env.MONGO_CONNECTION_URL)
+// .then(() => { // Similar to an event listener
+//     console.log('Database connected..');
+// })
+// .catch(err => {
+//     console.log('Connection failed..', err);
+// });
+mongoose.connect(process.env.MONGO_CONNECTION_URL, {
+    serverSelectionTimeoutMS: 50000 // Increase timeout to 50 seconds
+  })
+    .then(() => {
+      console.log('Database connected..');
+    })
+    .catch(err => {
+      console.log('Connection failed..', err);
+    });
+  
+  
 
 // Session store
 let mongoStore = MongoDbStore.create({
