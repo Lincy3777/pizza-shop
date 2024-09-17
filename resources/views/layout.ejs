@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-   """  <nav class="container mx-auto flex items-center justify-between py-4">
+   <nav class="container mx-auto flex items-center justify-between py-4">
         <div  >
             <a href="/"><img src="/img/myLogo.png" alt="logo"></a>
         </div>
@@ -61,99 +61,7 @@
                 <% } %>
             </ul>
         </div>
-    </nav> """
-    <nav class="container mx-auto flex flex-col md:flex-row items-center justify-between py-4 px-4">
-    <!-- Mobile Menu Toggle Button -->
-    <div class="md:hidden flex items-center">
-        <button id="menu-toggle" class="text-gray-800 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-    </div>
-
-    <!-- Logo and Menu Items -->
-    <div class="flex items-center justify-between w-full md:w-auto">
-        <!-- Logo -->
-        <div>
-            <a href="/">
-                <img src="/img/myLogo.png" alt="logo" class="h-8 md:h-12">
-            </a>
-        </div>
-        
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex md:items-center md:space-x-6">
-            <ul class="flex items-center space-x-6">
-                <li class="text-lg"><a href="/">Menu</a></li>                
-                <% if(user) { %>
-                    <li class="text-lg">
-                        <% if(user.role === 'admin') { %>
-                            <a href="/admin/orders">Orders</a>
-                        <% } else { %>
-                            <a href="/customers/orders">Orders</a>
-                        <% } %>
-                    </li>
-                    
-                    <li class="text-lg">
-                        <form id="logout" action="/logout" method="POST">
-                            <a onclick="document.getElementById('logout').submit()" href="#">Logout</a>
-                        </form>
-                    </li>
-                <% } else { %>
-                    <li class="text-lg"><a href="/register">Register</a></li>
-                    <li class="text-lg"><a href="/login">Login</a></li>
-                <% } %>
-
-                <!-- Cart element -->
-                <li>
-                    <a href="/cart" class="inline-block flex items-center px-4 py-2 rounded-full bg-[#973131] text-white">
-                        <span id="cartCounter" class="font-bold pr-2"><%= session.cart ? session.cart.totalQty : '' %></span>
-                        <img src="/img/cart.png" alt="cart" class="w-6 h-6">
-                    </a>
-                </li>
-
-                <!-- User profile display -->
-                <% if(user) { %>
-                    <li class="flex flex-col items-center">
-                        <i class="fas fa-user-circle text-sm mb-1" style="color: #973131;"></i> 
-                        <% if(user.role === 'admin') { %>
-                            <span class="font-bold text-sm">Admin</span>
-                        <% } else { %>
-                            <span class="font-bold text-sm"><%= user.name %></span>
-                        <% } %>
-                    </li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-50 hidden">
-        <div class="flex flex-col items-center py-4 space-y-4">
-            <a href="/" class="text-lg">Menu</a>
-            <% if(user) { %>
-                <a href="<%= user.role === 'admin' ? '/admin/orders' : '/customers/orders' %>" class="text-lg">Orders</a>
-                <a onclick="document.getElementById('logout').submit()" href="#" class="text-lg">Logout</a>
-            <% } else { %>
-                <a href="/register" class="text-lg">Register</a>
-                <a href="/login" class="text-lg">Login</a>
-            <% } %>
-            <a href="/cart" class="flex items-center px-4 py-2 rounded-full bg-[#973131] text-white">
-                <span id="cartCounterMobile" class="font-bold pr-2"><%= session.cart ? session.cart.totalQty : '' %></span>
-                <img src="/img/cart.png" alt="cart" class="w-6 h-6">
-            </a>
-        </div>
-    </div>
-</nav>
-
-<!-- Script to toggle mobile menu -->
-<script>
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.classList.toggle('hidden');
-    });
-</script>
-
+    </nav> 
     
     <%- body %>
         <footer class="bg-black text-white py-4">
