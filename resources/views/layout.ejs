@@ -23,9 +23,9 @@
 
         <div>
             <ul class="flex items-center">
-                <li class="ml-6 text-lg"><a href="/">Menu</a></li>                
+                <li class="ml-6 text-sm"><a href="/">Menu</a></li>                
                 <% if(user) { %>
-                    <li class="ml-6 text-lg">
+                    <li class="ml-6 text-sm">
                         <% if(user.role === 'admin') { %>
                             <a href="/admin/orders">Orders</a>
                         <% } else { %>
@@ -33,14 +33,14 @@
                         <% } %>
                     </li>
                     
-                    <li class="ml-6 text-lg">
+                    <li class="ml-6 text-sm">
                         <form id="logout" action="/logout" method="POST">
                             <a onclick="document.getElementById('logout').submit()" href="#">Logout</a>
                         </form>
                     </li>
                 <% } else { %>
-                    <li class="ml-6 text-lg"><a href="/register">Register</a></li>
-                    <li class="ml-6 text-lg"><a href="/login">Login</a></li>
+                    <li class="ml-6 text-sm"><a href="/register">Register</a></li>
+                    <li class="ml-6 text-sm"><a href="/login">Login</a></li>
                 <% } %>
     
                 <!-- Cart element -->
