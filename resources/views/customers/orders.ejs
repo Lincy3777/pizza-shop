@@ -24,7 +24,9 @@
                 <% orders.forEach((order) =>{ %>
                     <tr>
                         <td class="border px-5 py-2">
-                            <a class="link" href="/customers/orders/<%= order._id%>"><%= order._id %></a></td>
+                            <a class="link" href="/invoice/<%= order._id %>"><%= order._id %></a>
+
+                            <!-- <a class="link" href="/customers/orders/<%= order._id%>"><%= order._id %></a></td> -->
                             <td class="border px-5 py-2"><%= order.phone %></td>
                         <td class="border px-5 py-2"><%= order.address %></td>
                         <!-- used moment library to format the date nicely, A for AM/PM -->

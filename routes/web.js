@@ -5,7 +5,7 @@ const orderController = require('../app/http/controllers/customers/orderControll
 const AdminOrderController = require('../app/http/controllers/admin/orderController');
 const statusController = require('../app/http/controllers/admin/statusController');
 const Menu = require('../app/models/menu');
-
+const Order = require('../app/models/order');
 
 //Middlewares
 const guest = require('../app/http/middleware/guest');
@@ -37,8 +37,35 @@ function initRoutes(app){
     //customer routes
     app.post('/order',auth, orderController().store );
     app.get('/customers/orders',auth ,orderController().index)
-    app.get('/customers/orders/:id',auth ,orderController().show)
+    // app.get('/customers/orders/:id',auth ,orderController().show)
     //since id is a dynamic parameter : is used 
+
+    app.get('/invoice/:id', auth, async (req, res) => {
+        try {
+            const order = await Order.findById(req.params.id);
+            if (req.user._id.toString() === order.customerId.toString()) {
+                res.render('customers/invoice', { order });
+            } else {
+                res.redirect('/');
+            }
+        } catch (err) {
+            console.error('Error fetching order:', err);
+            res.redirect('/');
+        }
+    });
+    app.get('/track-order/:id', auth, async (req, res) => {
+        try {
+            const order = await Order.findById(req.params.id);
+            if (req.user._id.toString() === order.customerId.toString()) {
+                res.render('customers/singleOrder', { order });
+            } else {
+                res.redirect('/');
+            }
+        } catch (err) {
+            console.error('Error fetching order:', err);
+            res.redirect('/');
+        }
+    });
 
     //Admin routes
     app.get('/admin/orders', admin , AdminOrderController().index)
@@ -79,3 +106,4 @@ app.post('/admin/menu/update/:id', async (req, res) => {
 
 }
 module.exports = initRoutes
+

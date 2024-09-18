@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema; //class/constructor will be saved here
-// const user = require('./user');
+const user = require('./user');
 
 const orderSchema = new Schema({//no raw data only paths
     customerId:{
@@ -18,4 +18,6 @@ const orderSchema = new Schema({//no raw data only paths
     status:  { type: String, default: 'Order_placed'},
 },{timestamps: true})//created at , updated at
 
+
 module.exports = mongoose.model('order', orderSchema)//name of table, in the schema
+

@@ -86,7 +86,8 @@ function orderController() {
                 const order = await Order.findById(req.params.id);
                 // Authorize user
                 if (req.user._id.toString() === order.customerId.toString()) {
-                    res.render('customers/singleOrder', { order });
+                    // Render invoice page and pass the order details
+                    res.render('customers/invoice', { order });
                 } else {
                     res.redirect('/');
                 }
@@ -94,7 +95,8 @@ function orderController() {
                 console.error('Error fetching order:', err);
                 res.status(500).json({ message: 'Failed to retrieve order' });
             }
-        },
+        }
+                        
     };
 }
 
